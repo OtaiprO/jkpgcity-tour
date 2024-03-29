@@ -1,0 +1,36 @@
+{
+  "name": "jkpgcity-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "setup": "setup.bat",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "server": "node server/server.js",
+    "server:dev": "nodemon server/server.js",
+    "docker:build": "docker build -t jkpgcity-project . && docker tag jkpgcity-project localhost:5000/jkpgcity-project && docker push localhost:5000/jkpgcity-project",
+    "docker:testBuild": "docker run -p 3000:3000 -p 4000:4000 -t jkpg-city",
+    "kubernetes": "kubectl apply -f k8s/namespace.yaml && kubectl apply -f k8s/deployment.yaml && kubectl apply -f k8s/service.yaml && kubectl apply -f k8s/backend-service.yaml -n jkpgcity-project && kubectl rollout restart deployment/jkpgcity-project-deployment -n jkpgcity-project",
+    "k8s:startFrontend": "kubectl port-forward svc/jkpgcity-project-service 4000:4000 -n jkpgcity-project",
+    "k8s:startBackend": "kubectl port-forward svc/backend-service 3000:3000 -n jkpgcity-project",
+    "k8s:start": "concurrently \"npm run k8s:startFrontend\" \"npm run k8s:startBackend\"",
+    "k8s:applyDashboard": "k8s/start_k8s_dashboard.bat"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Benyeaahmin/Group-9-Advanced-Coding.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Benyeaahmin/Group-9-Advanced-Coding/issues"
+  },
+  "homepage": "https://github.com/Benyeaahmin/Group-9-Advanced-Coding#readme",
+  "description": "Creates a new user."
+}
