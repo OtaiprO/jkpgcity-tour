@@ -5,10 +5,10 @@ const stores = require("./stores.json");
 class ModelClass {
   constructor() {
     this.connection = new Pool({
-      user: "postgres",
-      host: "/cloudsql/jkpg-city-tour:europe-west4:postgres",
-      database: "postgres",
-      password: "12345",
+      user: "postgresql",
+      host: "dpg-coq01oi1hbls73dnbgs0-a",
+      database: "postgres_vyil",
+      password: "oC24VxovBnrSbnaxswrisbN5T0Q36ci2",
     });
   }
 
