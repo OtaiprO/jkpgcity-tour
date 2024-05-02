@@ -23,7 +23,7 @@ export const UpdateStore = () => {
   const fetchStoreData = async () => {
     try {
       const response = await fetch(
-        `https://jkpg-city-tour-service-yp4rwj667q-ez.a.run.app/stores/${storeId}`
+        `https://jkpgcity-tour-backend.onrender.com//stores/${storeId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch store data");
@@ -58,7 +58,7 @@ export const UpdateStore = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://jkpg-city-tour-service-yp4rwj667q-ez.a.run.app/stores/update/${storeId}`,
+        `https://jkpgcity-tour-backend.onrender.com//stores/update/${storeId}`,
         {
           method: "PUT",
           headers: {

@@ -13,7 +13,7 @@ export const CreateAccount = () => {
         throw new Error("Incorrect referee code");
       }
       const response = await fetch(
-        "https://jkpg-city-tour-service-yp4rwj667q-ez.a.run.app/register",
+        "https://jkpgcity-tour-backend.onrender.com//register",
         {
           method: "POST",
           headers: {

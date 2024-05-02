@@ -17,7 +17,7 @@ export const Stores = () => {
   async function fetchStores() {
     try {
       const response = await fetch(
-        "https://jkpg-city-tour-service-yp4rwj667q-ez.a.run.app/stores/all"
+        "https://jkpgcity-tour-backend.onrender.com//stores/all"
       );
       if (!response.ok) {
         throw new Error("Network response was not good");
@@ -59,7 +59,7 @@ export const Stores = () => {
   const handleDelete = async (storeId) => {
     try {
       const response = await fetch(
-        `https://jkpg-city-tour-service-yp4rwj667q-ez.a.run.app/stores/${storeId}`,
+        `https://jkpgcity-tour-backend.onrender.com//stores/${storeId}`,
         {
           method: "DELETE",
         }

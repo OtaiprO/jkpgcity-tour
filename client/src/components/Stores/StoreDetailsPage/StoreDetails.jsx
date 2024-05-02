@@ -17,7 +17,7 @@ export const StoreDetails = () => {
   const fetchStoreDetails = async () => {
     try {
       const response = await fetch(
-        `https://jkpg-city-tour-service-yp4rwj667q-ez.a.run.app/stores/${storeId}`
+        `https://jkpgcity-tour-backend.onrender.com//stores/${storeId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch store details");
@@ -32,7 +32,7 @@ export const StoreDetails = () => {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `https://jkpg-city-tour-service-yp4rwj667q-ez.a.run.app/stores/${storeId}`,
+        `https://jkpgcity-tour-backend.onrender.com//stores/${storeId}`,
         {
           method: "DELETE",
         }
