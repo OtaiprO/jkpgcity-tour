@@ -10,6 +10,9 @@ class ModelClass {
       database: "postgres_vyil",
       password: "oC24VxovBnrSbnaxswrisbN5T0Q36ci2",
       port: 5432,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     });
   }
 
