@@ -46,7 +46,7 @@ export const AddStore = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://jkpgcity-tour-backend.onrender.com//stores/add",
+        "https://jkpgcity-tour-backend.onrender.com/stores/add",
         {
           method: "POST",
           headers: {

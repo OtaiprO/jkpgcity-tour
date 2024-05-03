@@ -16,7 +16,7 @@ export const Login = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://jkpgcity-tour-backend.onrender.com//login",
+        "https://jkpgcity-tour-backend.onrender.com/login",
         {
           method: "POST",
           headers: {

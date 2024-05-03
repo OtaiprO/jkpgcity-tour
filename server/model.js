@@ -5,10 +5,15 @@ const stores = require("./stores.json");
 class ModelClass {
   constructor() {
     this.connection = new Pool({
-      user: "postgres",
-      host: "/cloudsql/jkpg-city-tour:europe-west4:postgres",
-      database: "postgres",
-      password: "12345",
+      user: "postgresql",
+      // host: "postgresql:oC24VxovBnrSbnaxswrisbN5T0Q36ci2@dpg-coq01oi1hbls73dnbgs0-a/postgres_vyil",
+      host: "dpg-coq01oi1hbls73dnbgs0-a.frankfurt-postgres.render.com",
+      database: "postgres_vyil",
+      password: "oC24VxovBnrSbnaxswrisbN5T0Q36ci2",
+      port: 5432,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     });
   }
 
@@ -17,76 +22,50 @@ class ModelClass {
   }
 
   async setupDatabase() {
+    // Create the 'users' table if it does not exist
     await this.connection.query(`
-    CREATE TABLE IF NOT EXISTS public.users
-    (
-        id SERIAL,
-        username VARCHAR(50) UNIQUE NOT NULL,
-        password VARCHAR(255) NOT NULL,
-        CONSTRAINT users_pkey PRIMARY KEY (id)
-    )
-`);
-
-    await this.connection.query(`
-    ALTER TABLE IF EXISTS public.users
-    OWNER to postgres
-`);
-    await this.connection.query(`
-    CREATE TABLE IF NOT EXISTS public.stores
-    (
-        id SERIAL,
-        name text,
-        url text,
-        district text,
-        rating integer,
-        imageurl text, 
-        restaurant integer DEFAULT 0,
-        pharmacy integer DEFAULT 0,
-        grocery integer DEFAULT 0,
-        construction integer DEFAULT 0,
-        games integer DEFAULT 0,
-        clothes integer DEFAULT 0,
-        perfume integer DEFAULT 0,
-        other integer DEFAULT 0,
-        CONSTRAINT stores_pkey PRIMARY KEY (id)
-    )`);
-
-    await this.connection.query(`
-      ALTER TABLE IF EXISTS public.stores
-          OWNER to postgres
+      CREATE TABLE IF NOT EXISTS public.users
+      (
+          id SERIAL,
+          username VARCHAR(50) UNIQUE NOT NULL,
+          password VARCHAR(255) NOT NULL,
+          CONSTRAINT users_pkey PRIMARY KEY (id)
+      )
     `);
 
+    // Create the 'stores' table if it does not exist
     await this.connection.query(`
-`);
-
-    await this.connection.query(`
-    ALTER TABLE public.stores
-    ADD COLUMN IF NOT EXISTS imageurl text,
-    ADD COLUMN IF NOT EXISTS restaurant integer DEFAULT 0,
-    ADD COLUMN IF NOT EXISTS pharmacy integer DEFAULT 0, 
-    ADD COLUMN IF NOT EXISTS grocery integer DEFAULT 0,
-    ADD COLUMN IF NOT EXISTS construction integer DEFAULT 0, 
-    ADD COLUMN IF NOT EXISTS games integer DEFAULT 0,
-    ADD COLUMN IF NOT EXISTS clothes integer DEFAULT 0,
-    ADD COLUMN IF NOT EXISTS perfume integer DEFAULT 0,
-    ADD COLUMN IF NOT EXISTS other integer DEFAULT 0;
+      CREATE TABLE IF NOT EXISTS public.stores
+      (
+          id SERIAL,
+          name text,
+          url text,
+          district text,
+          rating integer,
+          imageurl text, 
+          restaurant integer DEFAULT 0,
+          pharmacy integer DEFAULT 0,
+          grocery integer DEFAULT 0,
+          construction integer DEFAULT 0,
+          games integer DEFAULT 0,
+          clothes integer DEFAULT 0,
+          perfume integer DEFAULT 0,
+          other integer DEFAULT 0,
+          CONSTRAINT stores_pkey PRIMARY KEY (id)
+      )
     `);
 
     for (const store of stores) {
       const { rows } = await this.connection.query(
-        `
-        SELECT * FROM stores WHERE name = $1
-      `,
+        `SELECT * FROM stores WHERE name = $1`,
         [store.name]
       );
 
       if (rows.length === 0) {
         console.log(`Inserting ${store.name}`);
         await this.connection.query(
-          `
-          INSERT INTO stores (name, url, district)
-          VALUES ($1, $2, $3)
-        `,
+          `INSERT INTO stores (name, url, district)
+           VALUES ($1, $2, $3)`,
           [store.name, store.url, store.district]
         );
       }
