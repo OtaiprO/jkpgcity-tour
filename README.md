@@ -24,6 +24,7 @@ Authenticates a user.
 
 - `username`: The username of the user.
 - `password`: The password of the user.
+- `referee code`: 224466
 
 **Response:**
 
