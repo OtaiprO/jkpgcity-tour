@@ -6,9 +6,9 @@ class ModelClass {
   constructor() {
     this.connection = new Pool({
       user: "postgresql",
-      host: "dpg-cqtq8adds78s739rpt4g-a.frankfurt-postgres.render.com",
-      database: "postgres_vyil_v978",
-      password: "DkWHGbqkhAWyihS0eIvPwy5a8hPCTmW9",
+      host: "dpg-ctmnjl10pnds73fgvu90-a",
+      database: "postgresql_13bf",
+      password: "nTilnG0x0MHtgWK26uO5NvvTssixlabB",
       port: 5432,
       ssl: {
         rejectUnauthorized: false,
@@ -21,7 +21,6 @@ class ModelClass {
   }
 
   async setupDatabase() {
-    // Create the 'users' table if it does not exist
     await this.connection.query(`
       CREATE TABLE IF NOT EXISTS public.users
       (
@@ -32,7 +31,6 @@ class ModelClass {
       )
     `);
 
-    // Create the 'stores' table if it does not exist
     await this.connection.query(`
       CREATE TABLE IF NOT EXISTS public.stores
       (
