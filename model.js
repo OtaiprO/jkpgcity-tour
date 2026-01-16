@@ -6,9 +6,9 @@ class ModelClass {
   constructor() {
     this.connection = new Pool({
       user: "postgresql",
-      host: "dpg-d4qpcoali9vc73a20j20-a.frankfurt-postgres.render.com",
-      database: "postgresql_3vv9",
-      password: "AuOuR49epAupE1HpOwbh5TZ5CFB25eB1",
+      host: "dpg-d5laj1mmcj7s73b82i1g-a.frankfurt-postgres.render.com",
+      database: "postgresql_cr67",
+      password: "ixhilKwg5bLkGsGt3pk4jcpiN7ssb2Hu",
       port: 5432,
       ssl: {
         rejectUnauthorized: false,
